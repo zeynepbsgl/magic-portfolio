@@ -135,8 +135,8 @@ export default function About() {
                 
                 <Row paddingLeft="16" paddingRight="8">Download Resume</Row>
                 <IconButton
-                  href={about.calendar.link}
-                  download
+                 href="/zeynepcv.pdf" 
+                  download="Zeynep_Basoglu_CV.pdf" 
                   target="_blank"
                   data-border="rounded"
                   variant="secondary"
