@@ -1,0 +1,138 @@
+---
+title: "SPSS’e Giriş: İstatistiksel Veri Analizine Başlangıç Kılavuzu"
+subtitle: "Veri Analizi Okulu Notları - 4"
+summary: "SPSS arayüzü, değişken tanımlama, Excel'den veri aktarımı, GSS veri seti analizi ve Syntax kodlamanın temellerine dair kapsamlı rehber."
+image: "/images/projects/blog/hapiness.png"
+publishedAt: "2025-11-05"
+tag: "SPSS & Veri Analizi"
+---
+
+[👉 **Medium'da Oku: SPSS’e Giriş ve Temel Veri Analizi**](https://medium.com/@zeynepbsgl078/veri-analizi-okulu-4-spsse-giri%C5%9F-2fa34a710e19)
+
+## 1. Bölüm: Temel Kavramlar ve Arayüz
+
+SPSS, istatistiksel veri analizi için en yaygın kullanılan yazılımlardan biridir. Kullanıcı dostu arayüzüyle hem akademik hem profesyonel çalışmalarda güçlü bir araç sunar.
+
+### A. SPSS’in Dosya Formatları
+SPSS genellikle üç ana dosya türüyle çalışır:
+
+* **Veri Dosyası (.sav):** Verilerinizi ve değişken tanımlarınızı sakladığınız temel dosyadır.
+* **Çıktı Dosyası (.spv):** Analizlerin sonuçlarını, tabloları ve grafikleri kaydeder.
+* **Sözdizimi/Kod Dosyası (.sps):** Komutları yazarak analizlerinizi otomatikleştirmenizi sağlar.
+
+> **İpucu:** Yeni başlayanlar için “Klasik” mod önerilir, çünkü “Workbook” arayüzü karmaşık gelebilir.
+
+### B. Arayüze Bakış: Data View vs Variable View
+SPSS açıldığında iki temel görünüm karşınıza çıkar:
+
+1.  **Data View (Veri Görünümü):** Excel’e benzer. Sütunlar değişkenleri (variables), satırlar gözlemleri (cases) temsil eder. Veri girişi burada yapılır.
+2.  **Variable View (Değişken Görünümü):** Verinin “kütüphanesidir”. Her sütun bir değişkenin özelliklerini (ad, tür, ölçüm seviyesi vb.) tanımlar. **SPSS’in Excel’e göre en önemli farkı budur.**
+
+### C. Adım Adım Değişken Tanımlama
+
+Veri analizinde en temel adım, değişkenleri doğru tanımlamaktır. SPSS’te bu işlem üç ana bileşenden oluşur:
+
+**1. Değişken Türleri (Type)**
+Bir değişkenin türü, o değişkene ne tür veri (sayı, metin, tarih vb.) girileceğini belirler.
+
+![Excel Fonksiyonları](/images/projects/blog/numeric.png)
+
+**2. Ölçüm Seviyeleri (Measure)**
+Verinin istatistiksel niteliğini belirler (Scale, Ordinal, Nominal).
+
+![Excel Fonksiyonları](/images/projects/blog/nominal.png)
+
+**3. Değer Etiketleri (Values)**
+Nominal ve Ordinal değişkenler için SPSS sayısal kodlar kullanır. Bu kodlara anlam kazandırmak için etiket (label) tanımlanır.
+* *Örn:* `1 = Kadın`, `2 = Erkek`
+![Excel Fonksiyonları](/images/projects/blog/cins.png)
+
+
+**4. Kayıp Değerler (Missing Values)**
+Analize dahil etmek istemediğiniz ancak veri setinde bir anlamı olan değerleri tanımlarsınız (Örneğin "Cevap yok" = 99). Böylece analizlerde bu değerler ortalamaya katılmaz.
+
+---
+
+## 2. Bölüm: Veri Aktarımı ve GSS Veri Seti
+
+### A. Excel’den SPSS’e Veri Aktarımı
+Büyük veri setleriyle çalışırken veriyi elle girmek yerine içe aktarmak (import) zaman kazandırır.
+
+1.  **File → Open → Data…** menüsünü seçin.
+2.  Dosya türünü **Excel (.xls, .xlsx)** yapın ve dosyanızı seçin.
+3.  Açılan pencerede **“Read variable names from the first row of data”** seçeneğini işaretleyin.
+4.  *Not:* Aktarım sonrası `Variable View` kısmından türleri ve ölçüm seviyelerini mutlaka kontrol edin.
+
+### B. General Social Survey (GSS) Veri Seti Tanıma
+Derslerimizde ABD merkezli **GSS** veri setini kullanacağız. 1972'den beri yapılan bu anket; ırk, dindarlık, sosyal ilişkiler ve ekonomi gibi konularda 813 değişken içerir. SPSS'in kapasitesini görmek için idealdir.
+
+### C. Temel İstatistikler: Frekans Tablosu Okuma
+Kategorik verilerin dağılımını görmek için: `Analyze → Descriptive Statistics → Frequencies...`
+
+
+
+**Tablo Sütunlarının Anlamı:**
+* **Frequency:** Kaç kişi o cevabı verdi.
+* **Percent:** Kayıp veriler *dahil* yüzdesi.
+* **Valid Percent:** Kayıp veriler *hariç* yüzdesi (Raporlarda bu tercih edilir).
+* **Cumulative Percent:** O kategoriye kadar olan toplam oran (Sıralı verilerde anlamlıdır).
+
+---
+
+## 3. Bölüm: SPSS Syntax (Kod) Gücü
+
+Menüden yapılan her tıklama, SPSS’in arka planda oluşturduğu bir koda karşılık gelir. **Syntax** arayüzü, bu kodları yazmayı ve çalıştırmayı sağlar.
+
+### A. Arayüz Ayarı: İsimleri Göstermek
+Kod yazarken değişkenlerin uzun etiketlerini değil, kısa isimlerini görmek işinizi kolaylaştırır.
+* **Nasıl Yapılır:** `Edit → Options → General` sekmesinde **Variable Lists** başlığı altında **Display Names** ve **Alphabetical** seçeneklerini işaretleyin.
+
+### B. Temel Syntax Komutları
+
+Yeni bir syntax dosyası açmak için: `File → New → Syntax`.
+
+## 1. FREQUENCIES (Frekans Analizi)
+Kategorik değişkenlerin dağılımını ve grafiğini oluşturur.
+![Excel Fonksiyonları](/images/projects/blog/frequency.png)
+
+```spss
+/* Irk değişkeni için tablo ve bar grafiği oluştur */
+FREQUENCIES VARIABLES = race
+  /BARCHART.
+  
+```
+![Excel Fonksiyonları](/images/projects/blog/frequencytable.png)
+![Excel Fonksiyonları](/images/projects/blog/hapiness.png)
+
+## 2. DESCRIPTIVES (Betimleyici İstatistikler) 
+Sayısal (Scale) değişkenler için Ortalama, Standart Sapma, Min ve Max değerlerini hesaplar.  
+```excel
+/* Kelime testi puanı (wordsum) için istatistikler */
+DESCRIPTIVES VARIABLES = wordsum.
+
+/* Birden çok değişkeni aynı anda analiz etmek için */
+DESCRIPTIVES VARIABLES = age income educ.
+```
+**Açıklama:**
+Bu komut, “wordsum” (kelime bilgisi testi puanı gibi) değişkeninin betimleyici istatistiklerini gösterir.
+
+Birden fazla değişken için aynı anda analiz yapabilirsiniz:
+![Excel Fonksiyonları](/images/projects/blog/komut.png)
+
+### C. İleri Teknik: TEMPORARY Komutu
+Menüden yapılan `Data → Select Cases...`  işlemi, veri setinde kalıcı bir filtre bırakır. Bu durum, arka arkaya farklı gruplar (Örn: Sadece kadınlar, sonra sadece erkekler) için analiz yaparken büyük bir risk ve zaman kaybıdır. Analizleriniz yanlış gruplar üzerinden hesaplanabilir.
+
+**TEMPORARY** komutu, bu sorunu çözer:
+
+**Tanım:** Veri setine kalıcı bir değişiklik yapmadan, sadece hemen ardından gelen tek bir prosedür için geçici filtreleme veya manipülasyon yapmak için kullanılır.
+
+```spss
+TEMPORARY. SELECT IF (sex = 2). /* Sadece kadınları seçer. */ 
+DESCRIPTIVES variables = wordsum
+```
+1. `TEMPORARY` komutu, veriyi geçici olarak kadınlarla filtrelenmeye hazırlar.
+2. Hemen ardından gelen `SELECT IF (sex = 2)` komutu filtreyi uygular.
+3. Hemen ardından gelen `DESCRIPTIVES` komutu yalnızca kadınların kelime bilgisi ortalamasını hesaplar.
+4. Bu analiz bittiği an, filtre otomatik olarak kalkar ve veri seti orijinal (tüm gözlemlerin olduğu) haline geri döner.
+
+**Özet:** TEMPORARY. komutu, SPSS'te temiz, güvenli ve hızlı bir şekilde alt grup analizleri yapmanın (Örn: "Kadınların boy ortalaması", "Erkeklerin boy ortalaması") anahtarıdır. Kodu çalıştırıp çıktınızı aldıktan sonra veri setini sıfırlama derdiniz olmaz.

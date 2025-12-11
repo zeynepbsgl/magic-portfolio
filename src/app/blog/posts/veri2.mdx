@@ -1,0 +1,150 @@
+---
+title: "Excel ve Modern Veri Girişi Mantığı"
+subtitle: "Veri Analizi Okulu Notları - 2"
+summary: "Excel'in temel yapısından başlayarak, değişken türleri, ölçüm seviyeleri ve veri temizleme süreçlerine dair kapsamlı bir rehber."
+image: "/images/projects/blog/veri2.png"
+publishedAt: "2025-10-15"
+tag: "Excel & Veri Analizi"
+---
+
+[👉 **Medium'da Oku: Excel ve Modern Veri Girişi Mantığı**](https://medium.com/@zeynepbsgl078/veri-analizi-okulu-hafta-2-f8d8caf64d76)
+
+## 1. Bölüm: Excel ve Modern Veri Girişi Mantığı
+
+**Excel Nedir?** Excel, en yaygın kullanılan spreadsheet (elektronik tablo) tarzı veri girişi ve düzenleme aracıdır. Veri setlerinin oluşturulması, temizlenmesi ve ön analizinin yapılması için vazgeçilmez bir araçtır.
+
+**Modern Veri Girişi Mantığı:** Modern veri, betimleyici özellikleri parçalayarak sisteme girer. Bu mantık, Excel’in temel yapısına tam olarak oturur:
+
+* Veri, satır ve sütunlardan oluşan sistemin elektronik ortama taşınmış şeklidir.
+* Bu sistemde, veri setinin en üst satırındaki tanımlamalar (Ad, Soyad, Yaş, Burs Miktarı vb.) **değişkenler** olarak adlandırılır.
+* Her bir satır ise, bu değişkenlere ait bilgileri taşıyan bir **gözlem birimi** (kayıt, katılımcı) temsil eder.
+
+Bu yapı, veriyi organize etmenin ve istatistiksel analize hazırlamanın en temel ve evrensel yoludur.
+
+### A. Veri Analizinin Yapı Taşları: Değişkenler (Variables)
+
+Veri setindeki her bir sütun, bir değişkeni temsil eder. Değişkenler, gözlem birimleri (örneğin öğrenciler) arasında değişen bilgileri (örneğin yaş, cinsiyet, not ortalaması) barındırır. İstatistiksel analizde ve veri biliminde çalışılan esas element değişkenlerdir.
+
+İstatistiksel analizin yapı taşı, değişkenler üzerinden çalışmaktır. Değişken, adı üstünde değişen bilgidir, sabit değildir ve varyansı (değişimi) vardır.
+
+
+
+**Değişkenlerin Sınıflandırılması: İki Temel Bakış Açısı**
+
+Değişkenleri anlamak, doğru analiz yöntemini seçmek için hayati öneme sahiptir. Değişkenler, temelde iki farklı bakış açısıyla sınıflandırılır:
+
+1.  **Verinin Giriş Şekli (Bilgisayar Dili/Veri Tipi):** Verinin hücreye nasıl kaydedildiği (metin mi, sayı mı, tarih mi?).
+2.  **Ölçüm Seviyesi (İstatistiksel Türü):** Verinin matematiksel özelliklerini ve hangi analizlere uygun olduğunu belirleyen türü (Nominal, Sıralı, Aralık, Oran).
+
+Bu derste, öncelikle verinin giriş şekli ve temel kurallar üzerinde duracağız.
+
+### B. Veri Girişi ve Değişken İsimlendirme Kuralları
+
+Veri analizi platformlarına (Excel, Python, R, SPSS vb.) aktarılacak verilerde, değişken isimlerinin standardize edilmesi büyük önem taşır. Aksi takdirde, programlar veriyi doğru okuyamayabilir veya hatalı analiz edebilir.
+
+**Değişken İsimlendirme İçin Altın Kurallar:**
+
+![İsimlendirme Kuralları](/images/projects/blog/değişkenisimlendirme.png)
+
+### C. Veri Giriş Şekli: Temel Veri Tipleri
+
+Excel gibi platformlara veri girildiğinde, program verinin türünü otomatik olarak algılamaya çalışır. Ancak veri analizi için bu tipleri bilinçli olarak yönetmek gerekir:
+
+![Veri Tipleri](/images/projects/blog/verigiris.png)
+
+> **Önemli Not (Tarih Tipi):** Excel, tarihleri 1,2,3,4,5… şeklinde sayarak 1900 yılından bugüne kadar sıralar. Eğer bir tarih hücresinin formatını genel (General) sayıya çevirirseniz, Excel’in bu sayıyı görmüş olursunuz.
+
+### D. Kayıp Değerler (Missing Values — NA)
+
+Veri setinde bir hücrede bilginin olmaması durumudur. Programlama dillerinde genellikle **NA (Not Available)** veya **NaN (Not a Number)** olarak ifade edilir. Veri analistinin önemli görevlerinden biri, kayıp veriyi yönetmek ve analiz için düzenlemektir.
+
+Kayıp veriler, genellikle iki ana türde incelenebilir:
+
+* **Kullanıcı Kaybı (User Missing):** Bilginin olmaması *gerektiği* için (mantıksal olarak) boş bırakılan durumlar. (Örn: Burs almayan bir katılımcının “Burs Miktarı” hücresinin boş olması).
+* **Sistemsel Kayıp (System Missing):** Bilginin *olması gerektiği halde* (örneğin anket sorusunun atlanması veya veri giriş hatasıyla) boş kalan durumlar. (Örn: “Burs Var” olarak işaretlenmiş bir katılımcının “Burs Miktarı” hücresinin boş olması).
+
+Bu temel bilgileri sağlamlaştırmak, veri analizi süreçlerinde doğru kararlar almanız ve veriyi hatasız işlemeniz için en kritik adımdır. Bir inşaat ustasının tuğla, beton ve demiri ayırt etmesi gibi, bir veri analistinin de değişkenlerin türlerini doğru tanıması gerekir.
+
+## 2. Bölüm: Ölçüm Seviyeleri
+
+Veri analizinde değişkenin türünü bilmek, doğru istatistiksel testi seçmenin temelidir. Bu bölümde, verinin hücreye nasıl girildiğinden (String, Number) farklı olarak, istatistiksel analizdeki anlamına odaklanacağız: **Ölçüm Seviyeleri**.
+
+
+### A. Değişkenlerin İstatistiksel Türleri
+
+İstatistikçiler, bir değişkenin istatistiğin konusu veya aracı olması itibarıyla taşıdığı matematiksel özellikleri dört temel ölçüm seviyesinde sınıflandırır:
+
+**1. Nominal Değişken (İsimsel / Kategorik)**
+* **Tanım:** Değişkenin kategorileri arasında bir sıralama, artma veya azalma yoktur; sadece isim ve ayrışık grupları ifade eder.
+* **Özellik:** Sadece frekans ve mod (tepe değer) gibi temel sayımlar yapılabilir.
+* **Örnekler:** Cinsiyet (Kadın/Erkek), Medeni Durum, Bölüm Adları.
+
+**2. Ordinal Değişken (Sıralı)**
+* **Tanım:** Kategoriler arasında bir artma/azalma veya düzen (sıralama) vardır, ancak bu artışlar arasındaki farklar *eşit aralıkta değildir* ve ölçülemez.
+* **Özellik:** “Büyüktür” veya “küçüktür” gibi sıralama ilişkisi kurulabilir.
+* **Örnekler:** Eğitim Seviyesi, Memnuniyet Düzeyi (Likert Ölçekleri), Askerlik Rütbeleri.
+
+**3. Interval Değişken (Aralıklı)**
+* **Tanım:** Kategoriler arasında hem bir sıralama hem de eşit aralıklar vardır, ancak *gerçek bir sıfır noktası yoktur*. Oran hesaplaması yapılamaz.
+* **Örnek:** Sıcaklık ($^\circ C$ veya $^\circ F$). $20^\circ C$, $10^\circ C$’den iki kat daha sıcak değildir, çünkü $0^\circ C$ mutlak yokluğu temsil etmez.
+
+**4. Ratio Değişken (Oranlı)**
+* **Tanım:** Bir sıralama, eşit aralık ve *gerçek, mutlak bir sıfır noktası vardır*. Bu sayede oran (kat) hesaplamaları yapılabilir.
+* **Özellik:** İstatistiksel olarak en zengin değişken türüdür. Her türlü matematiksel işlem yapılabilir.
+* **Örnek:** Yaş, Boy, Kilo, Gelir. (40 yaşındaki biri, 20 yaşındaki birinden iki kat daha fazla yaşamıştır).
+
+### B. Excel’de Kod Yazmaya İlk Adım: Formüllerle Veri İşleme
+
+Veri analizi, sadece veriyi girmekle bitmez; onu işlemek, dönüştürmek ve ondan yeni bilgiler üretmek gerekir. İşte Excel’de temel matematiksel işlemleri yaparken atacağınız ilk **“kod yazma”** adımı:
+
+Tüm matematiksel işlemler ve fonksiyonlar, hücreye **eşittir (=)** işareti konularak başlatılır.
+
+* **Toplama İşlemi (SUM):** Belirli bir aralıktaki tüm değerleri toplamak. ` =SUM(C1:C25) `
+* **Basit Matematiksel İşlemler:** Kar = Toplam Gelir - Toplam Gider formülü: ` =C26 - D26 `
+
+> **Pratik İpucu (Sürükle Bırak):** Bir hücreye formül yazdıktan sonra, sağ alt köşesindeki küçük kareden tutup aşağı çekerseniz, Excel formülü otomatik olarak diğer satırlara uygular.
+
+**Not: Veri Seviyesi (Micro Data ve Aggregated Data)**
+Excel’e girdiğiniz her bir satır **Micro Data** (en küçük gözlem birimi) düzeyindedir. Eğer her bölümdeki öğrenci sayısını veya ortalama GP’yi hesaplarsanız, bu **Aggregated Data** olur. Yorumlarınızı daima verinin toplandığı seviyede yapmanız, *ekolojik yanılgıya* düşmemeniz için hayati önem taşır.
+
+## 3. Bölüm: Excel’de Fonksiyonel Programlama ve Şartlı Analizlere Giriş
+
+Değişken türlerini ve giriş kurallarını öğrendik. Şimdi, veri analizi yeteneğimizin temelini oluşturan, Excel’in formül gücünü kullanarak şartlı işlemler yapmaya ve temel istatistikleri hesaplamaya geçiyoruz.
+
+
+
+### 1. Temel İstatistik ve Agregasyon Fonksiyonları
+Bir veri setindeki öğrencilerin toplam burs miktarı, ortalama not ortalaması (GP) gibi temel tanımlayıcı istatistikleri bulmak için kullanılır.
+
+![Excel Fonksiyonları](/images/projects/blog/sumaverage.png)
+
+### 2. Veri Analizinin Kalbi: Şartlı Fonksiyonlar (IF’li İşlemler)
+
+Veri analizi, çoğunlukla bir **şarta bağlı** işlem yapmayı gerektirir.
+
+**A. Tek Şartlı İşlemler (IF Fonksiyon Ailesi)**
+* **AVERAGEIF:** Belirli bir şarta uyan hücrelerin ortalamasını alır.
+    * Formül: `=AVERAGEIF(Barınma Aralığı; 1; GP Aralığı)`
+* **SUMIF / COUNTIF:** Tek bir şarta uyan hücrelerin toplamını alır veya sayısını bulur.
+
+**B. Çoklu Şartlı İşlemler (IFS Fonksiyon Ailesi)**
+Birden fazla şartın aynı anda sağlanmasını gerektiren kompleks analizler için kullanılır (Örn: Yurtta kalan *ve* Erkek öğrencilerin notu).
+* Formül: `=AVERAGEIFS(GP Aralığı; Barınma Aralığı; 1; Cinsiyet Aralığı; "Erkek")`
+
+### 3. Veri Düzenleme ve Kodlama Araçları
+
+Excel, sadece hesaplama değil, veri setini düzenleme ve hazırlama konusunda da güçlü araçlar sunar.
+
+* **IF Döngüsü ile Koşullu Kategorileştirme:** Bir durumu sorgulayıp sonucuna göre yeni bir değer atamaktır.
+    * Örn: `=IF(H2 < 2.00; "FAIL"; "PASS")`
+* **Sütunları Bölme (Text to Columns):** Bir sütundaki veriyi belirli bir ayıraca göre ayırır (Ad ve Soyad ayırma gibi).
+* **Birleştirme (CONCATENATE):** Birden fazla sütunu tek bir metin sütununda birleştirir.
+* **Koşullu Biçimlendirme (Conditional Formatting):** Belirli şartları sağlayan hücreleri (en yüksek GP’ler vb.) otomatik olarak renklendirmek için kullanılır.
+
+---
+
+### Medium'da Okumaya Devam Edin
+
+Bu içerik ilginizi çektiyse, Excel ve Veri Analizi serisinin tamamına Medium üzerinden ulaşabilirsiniz.
+
+[👉 **Medium'da Oku: Excel ve Modern Veri Girişi Mantığı**](https://medium.com/@zeynepbsgl078/veri-analizi-okulu-hafta-2-f8d8caf64d76)

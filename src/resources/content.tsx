@@ -2,20 +2,20 @@ import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/
 import { Line, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
-  firstName: "Selene",
-  lastName: "Yu",
-  name: `Selene Yu`,
-  role: "Design Engineer",
-  avatar: "/images/avatar.jpg",
-  email: "example@gmail.com",
-  location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Bahasa"], // optional: Leave the array empty if you don't want to display languages
+  firstName: "Zeynep",
+  lastName: "Basoglu",
+  name: `Zeynep Basoglu`,
+  role: "Computer Engineer | Full-Stack Developer",
+  avatar: "/images/vize.jpg",
+  email: "esrazeynepbasoglu@gmail.com",
+  location: "Türkiye/İzmir", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
+  languages: ["Turkish", "English"], // optional: Leave the array empty if you don't want to display languages
 };
 
 const newsletter: Newsletter = {
   display: true,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
-  description: <>My weekly newsletter about creativity and engineering</>,
+  title: <>Contact with me </>,
+  description: <>esrazeynepbasoglu@gmail.com</>,
 };
 
 const social: Social = [
@@ -25,25 +25,20 @@ const social: Social = [
   {
     name: "GitHub",
     icon: "github",
-    link: "https://github.com/once-ui-system",
+    link: "https://github.com/zeynepbsgl",
     essential: true,
   },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
+    link: "https://www.linkedin.com/in/zeynep-ba%C5%9Fo%C4%9Flu-181872229/",
     essential: true,
   },
+  
   {
-    name: "Instagram",
-    icon: "instagram",
-    link: "https://www.instagram.com/once_ui/",
-    essential: false,
-  },
-  {
-    name: "Threads",
-    icon: "threads",
-    link: "https://www.threads.com/@once_ui",
+    name: "Medium",
+    icon: "medium",
+    link: "https://medium.com/@zeynepbsgl078",
     essential: true,
   },
   {
@@ -60,25 +55,27 @@ const home: Home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building bridges between design and code</>,
+ headline: <>Full-Stack Mastery: Architecting Scalable Systems from End-to-End</>,
   featured: {
     display: true,
     title: (
       <Row gap="12" vertical="center">
-        <strong className="ml-4">Once UI</strong>{" "}
+        <strong className="ml-4">Zeynep Başoğlu</strong>{" "}
         <Line background="brand-alpha-strong" vert height="20" />
         <Text marginRight="4" onBackground="brand-medium">
-          Featured work
+          Portfolio
         </Text>
       </Row>
     ),
     href: "/work/building-once-ui-a-customizable-design-system",
   },
-  subline: (
-    <>
-    I'm Selene, a design engineer at <Text as="span" size="xl" weight="strong">ONCE UI</Text>, where I craft intuitive <br /> user experiences. After hours, I build my own projects.
-</>
-  ),
+ subline: (
+  <>
+    Freshly graduated <Text as="span"  weight="strong">Computer Engineer </Text> from Manisa Celal Bayar University . I specialize in building highly scalable, full-stack applications with
+    <Text as="span" size="xl" weight="strong"> .NET Core & React.js</Text>
+    .
+  </>
+), 
 };
 
 const about: About = {
@@ -95,16 +92,14 @@ const about: About = {
   },
   calendar: {
     display: true,
-    link: "https://cal.com",
+    link: "/zeynepcv.pdf",
   },
   intro: {
     display: true,
     title: "Introduction",
     description: (
       <>
-        Selene is a Jakarta-based design engineer with a passion for transforming complex challenges
-        into simple, elegant design solutions. Her work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+        Zeynep Başoğlu is an İzmir-based Full Stack Software Engineer with a passion for transforming complex technical challenges into scalable, user-centric end-to-end solutions. Her work spans robust .NET Core architecture, modern React interfaces, and the convergence of engineering discipline with technology.
       </>
     ),
   },
@@ -113,23 +108,22 @@ const about: About = {
     title: "Work Experience",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "Zirve Deri",
+        timeframe: "07/2025 - 11/2025",
+        role: "Freelance Full-Stack Developer",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+            Technical Infrastructure and Architecture: End-to-end, full-stack application. The backend implemented secure identity and JWT-based authentication systems using .NET Core APIs. The frontend implemented performance-oriented state management and caching using React/TypeScript and the Redux Toolkit.
+
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+           E-Commerce Functionality: All real-world e-commerce processes were made functional with PayTR payment integration, product management with variants (such as size/color), and a fully comprehensive Admin Panel.
           </>,
         ],
         images: [
           // optional: leave the array empty if you don't want to display images
           {
-            src: "/images/projects/project-01/cover-01.jpg",
+            src: "/images/projects/project-01/zirve.png",
             alt: "Once UI Project",
             width: 16,
             height: 9,
@@ -137,17 +131,43 @@ const about: About = {
         ],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
+        company: "Karya SMD Bilişim",
+        timeframe: "02/2025 - 06/2025",
+        role: "Full-Stack Developer Intern",
         achievements: [
           <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
+            Full Stack Application Development: Executed end-to-end frontend and backend development using React and ASP.NET Core within enterprise projects.
           </>,
           <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
+           System Competencies: Actively participated in team-based development and code review processes, focusing on RESTful API integration, data modeling, form validation, and professional error handling.
+          </>,
+        ],
+        images: [],
+      },
+       {
+        company: "Orhun Teknoloji",
+        timeframe: "08/2024 - 09/2024",
+        role: "Frontend Developer Intern",
+        achievements: [
+          <>
+            UI Development & Quality Assurance: Provided technical contribution to user interface development processes, including code review and the
+          </>,
+          <>
+          Agile Methodology: Actively contributed to achieving sprint goals by fulfilling tasks within the framework of Agile working principles.
+          </>,
+        ],
+        images: [],
+      },
+      {
+        company: "Kalahari Hotel",
+        timeframe: "06/2023 - 10/2023",
+        role: "Work and Travel - USA / Ohio",
+        achievements: [
+          <>
+           Advanced Communication: Gained advanced English communication and cross-cultural collaboration experience within an international work environment.
+          </>,
+          <>
+          Adaptation & Problem Solving: Demonstrated strong cultural adaptability and developed independent problem-solving skills through experience in the USA (Ohio)
           </>,
         ],
         images: [],
@@ -159,76 +179,72 @@ const about: About = {
     title: "Studies",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
+        name: "Manisa Celal Bayar University",
+        description: <>Graduated from Computer Engineering with <Text as="span"  weight="strong">Honors. GPA : 3.19</Text></>,
       },
-      {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
-      },
+      
     ],
   },
   technical: {
     display: true, // set to false to hide this section
     title: "Technical skills",
-    skills: [
-      {
-        title: "Figma",
-        description: (
-          <>Able to prototype in Figma with Once UI with unnatural speed.</>
-        ),
-        tags: [
-          {
-            name: "Figma",
-            icon: "figma",
-          },
-        ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
-      },
-      {
-        title: "Next.js",
-        description: (
-          <>Building next gen apps with Next.js + Once UI + Supabase.</>
-        ),
-        tags: [
-          {
-            name: "JavaScript",
-            icon: "javascript",
-          },
-          {
-            name: "Next.js",
-            icon: "nextjs",
-          },
-          {
-            name: "Supabase",
-            icon: "supabase",
-          },
-        ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
-      },
+   skills: [
+  // 1. PRIMARY STACK FOCUS: .NET Core (Backend & Architecture)
+  {
+    title: ".NET Core (Full Stack)",
+    description: (
+      <>Expertise in developing scalable APIs using .NET Core and implementing secure authentication systems via Identity and JWT for end-to-end applications.</>
+    ),
+    tags: [
+      { name: "C#", icon: "csharp" },
+      { name: ".NET Core", icon: "dotnet" }, 
+      { name: "Python", icon: "python" },
     ],
+    images: [],
+  },
+  
+  // 2. PRIMARY STACK FOCUS: React & TypeScript (Frontend & State Management)
+  {
+    title: "React.js & TypeScript",
+    description: (
+      <>Developing modern, high-performance web interfaces with TypeScript and React. Proficient in global state management and performance caching using Redux Toolkit.</>
+    ),
+    tags: [
+      { name: "React.js", icon: "react" },
+      { name: "TypeScript", icon: "typescript" },
+      { name: "JavaScript", icon: "javascript" },
+      { name: "Redux", icon: "redux" },
+    ],
+    images: [],
+  },
+
+  // 3. DATABASE AND DATA MANAGEMENT
+  {
+    title: "Database Management & Querying",
+    description: (
+      <>Proficiency in data modeling and writing performance-oriented queries for both MSSQL and MySQL relational database environments.</>
+    ),
+    tags: [
+      { name: "MSSQL", icon: "mssql" }, 
+      { name: "MySQL", icon: "mysql" }, 
+    ],
+    images: [],
+  },
+
+  // 4. FOUNDATIONAL & DESIGN SKILLS
+  {
+    title: "Foundational Frontend & Design",
+    description: (
+      <>Mastery of modern HTML/CSS standards to ensure responsive and accessible UI development. Able to translate Figma prototypes into clean code.</>
+    ),
+    tags: [
+      { name: "HTML5", icon: "html5" },
+      { name: "CSS3", icon: "css3" },
+      { name: "Figma", icon: "figma" },
+    ],
+    images: [],
+  },
+],
   },
 };
 
@@ -250,55 +266,6 @@ const work: Work = {
   // All projects will be listed on the /home and /work routes
 };
 
-const gallery: Gallery = {
-  path: "/gallery",
-  label: "Gallery",
-  title: `Photo gallery – ${person.name}`,
-  description: `A photo collection by ${person.name}`,
-  // Images by https://lorant.one
-  // These are placeholder images, replace with your own
-  images: [
-    {
-      src: "/images/gallery/horizontal-1.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-4.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/horizontal-3.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-1.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/vertical-2.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/horizontal-2.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/horizontal-4.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-3.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-  ],
-};
 
-export { person, social, newsletter, home, about, blog, work, gallery };
+
+export { person, social, newsletter, home, about, blog, work };

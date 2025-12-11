@@ -1,0 +1,88 @@
+---
+title: "Veri Dedektifliği 101: Gürültüyü Susturup Sinyali Duymak"
+subtitle: "Veri Analizi Okulu Notları - 8"
+summary: "İstatistikte gürültü ve sinyal ayrımı, standart hata, hipotez testleri (p-değeri) ve temel analiz araçları (ANOVA, T-Testi, Ki-Kare, Korelasyon) rehberi."
+image: "/images/projects/blog/noise.png"
+publishedAt: "2025-12-03"
+tag: "İstatistik & Hipotez Testleri"
+---
+
+[👉 **Medium'da Oku: Veri Dedektifliği ve Hipotez Testleri**](https://medium.com/@zeynepbsgl078/veri-analizi-okulu-hafta-8-e251b326be61)
+
+Her veri seti, içinde rastgele değişimler ve anlamsız dalgalanmalar barındırır. İstatistikte buna **“Gürültü” (Noise)** diyoruz. Bizim bir analist olarak görevimiz; bu gürültünün ötesine geçerek gerçek, anlamlı ve tekrarlanabilir desenleri, yani **“Sinyal”i (Signal)** bulmaktır.
+
+Peki, ekranda gördüğümüz bir yükseliş veya iki grup arasındaki farkın sadece bir tesadüf (gürültü) mü, yoksa peşinden gitmeye değer bir gerçek (sinyal) mi olduğunu nasıl anlarız?
+![Excel Fonksiyonları](/images/projects/blog/noise.png)
+
+
+## 1. Belirsizliği Ölçmek
+
+Bir grubun ortalamasına bakarken (örneğin müşterilerin yaş ortalaması), bu sayının tüm kitleyi ne kadar iyi temsil ettiğini bilmemiz gerekir. Burada iki kavram devreye girer:
+
+* **Standart Sapma:** Elimizdeki verinin kendi içindeki yayılımıdır.
+* **Standart Hata:** İşte dedektifin asıl aracı budur. Örneklem ortalamamızdan yola çıkarak, toplumun gerçek ortalamasının hangi aralıkta olabileceğini tahmin etmemizi sağlar.
+
+> **Örnek:** Bir grubun boy ortalaması 167 cm olabilir. Ancak standart hatayı hesapladığımızda, %95 güvenle gerçek ortalamanın **166–167 cm** aralığında olduğunu söyleyebiliriz.
+![Excel Fonksiyonları](/images/projects/blog/standartsapma.png)
+
+
+### Görsel Kanıt: Hata Çubukları (Error Bars)
+Grupları karşılaştırırken ilk bakacağımız yer grafiklerdeki hata çubuklarıdır.
+
+* **Kesişim Varsa:** Gruplar arasında muhtemelen anlamlı bir fark yoktur (Gürültü).
+* **Ayrışma Varsa:** Eğer kadınların boy ortalaması çubuğu (155–161 cm) ile erkeklerinki (172–173 cm) hiç kesişmiyorsa; tebrikler, güçlü bir **sinyal** yakaladınız demektir.
+
+![Hata Çubukları Örneği](/images/projects/blog/3.png)
+
+## 2. Soruşturma Yöntemi: Hipotez Testi
+
+Gözle gördüğümüz farkın tesadüf olmadığını matematiksel olarak kanıtlamak için bir hipotez kurar ve onu test ederiz.
+
+### Kanıt Standardımız: p-değeri
+Karar vermek için **p-değerine (anlamlılık düzeyi)** bakarız. Sınırımız genellikle **0.05**'tir.
+
+![P Değeri Tablosu](/images/projects/blog/4.png)
+
+## 3. İstatistiğin Araç Seti: Hangi Testi Seçmeliyim?
+
+Sorduğunuz sorunun türü ve değişkenlerinizin yapısı, hangi silahı seçeceğinizi belirler. İşte en sık kullanılan 4 temel araç:
+
+![İstatistik Testleri Özeti](/images/projects/blog/5.png)
+
+### Araç 1: ANOVA (Üç veya Daha Fazla Grubu Karşılaştırmak)
+Sadece iki grup değil, birden fazla grubun ortalamalarını aynı anda kıyaslamak için kullanılır.
+
+![ANOVA Analizi](/images/projects/blog/6.png)
+
+![ANOVA Tablosu](/images/projects/blog/7.png)
+
+### Araç 2: T-Testi (İki Grubu Karşılaştırmak)
+Sadece iki bağımsız grubu (Kadın-Erkek veya Deney-Kontrol) sayısal bir veri üzerinden kıyaslayacaksanız **Independent Samples T-Test** kullanırsınız.
+
+**Kritik Bir Detay: Levene Testi**
+Grupların varyanslarının eşit olup olmadığını kontrol eder.
+
+![Levene Testi](/images/projects/blog/8.png)
+
+### Araç 3: Ki-Kare (Kategorileri İlişkilendirmek)
+İki kategorik değişkenin birbiriyle ilişkisi olup olmadığına bakar (örn: Cinsiyet vs. Yapay Zeka Farkındalığı).
+
+* **Mantık:** Gözlemlenen değerler (Observed), rastgele beklenen değerlerden (Expected) ne kadar uzak?
+* **Örnek:** Erkeklerin %60'ı “Yapay Zekayı biliyorum” derken kadınlarda bu oran %40 ise ve test sonucu **p < 0.05** çıkarsa; cinsiyet ile farkındalık arasında anlamlı bir ilişki vardır.
+
+![Ki-Kare Testi](/images/projects/blog/9.png)
+
+### Araç 4: Korelasyon (Sayısal İlişkiyi Ölçmek)
+İki sayısal değişken arasındaki ilişkinin yönünü ve şiddetini ölçer.
+
+![Korelasyon Grafiği](/images/projects/blog/10.png)
+
+---
+
+## Özet: Karar Rehberi
+
+Analize başlarken kendinize şu iki soruyu sorun: **Amacım ne?** ve **Kaç grubum var?**
+
+![Karar Ağacı](/images/projects/blog/11.png)
+
+İstatistiksel analiz, verilerdeki belirsizliği (gürültü) azaltarak, eyleme geçirilebilir içgörüler (sinyaller) elde etme sanatıdır. Artık bu hikayeleri ortaya çıkaracak temel araç setine sahipsiniz.

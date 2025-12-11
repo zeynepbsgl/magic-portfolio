@@ -1,0 +1,244 @@
+---
+title: "Excel ve Modern Veri Girişi Mantığı"
+subtitle: "Veri Analizi Okulu Notları - 3"
+summary: "Excel'in temel yapısından başlayarak, hızlı düzenleme teknikleri, metin fonksiyonları, veri temizleme, arama fonksiyonları, Pivot Table ve grafik şablonlarına kadar modern veri analizi yaklaşımını kapsayan kapsamlı bir rehber."
+image: "/images/projects/blog/veri2.png"
+publishedAt: "2025-10-22"
+tag: "Excel & Veri Analizi"
+---
+
+[👉 **Medium'da Oku: Excel ve Modern Veri Girişi Mantığı**](https://medium.com/@zeynepbsgl078/veri-analizi-okulu-hafta-3-745ebd6de9cb)
+
+## 1. Bölüm: Excel ve Modern Veri Girişi Mantığı
+
+Excel, yalnızca tablo düzenlemek için kullanılan basit bir araç değil; veri analizi, raporlama, veri temizleme ve otomasyon süreçlerinde kritik rol oynayan güçlü bir platformdur. Modern veri yapısı, Excel’in satır–sütun düzeni üzerine kurulu olduğu için, veri bilimine yeni başlayanlar için ideal bir giriş noktasıdır.
+
+* Bir Excel sayfasındaki **sütunlar değişkenleri**,  
+* Her bir satır ise **gözlem birimlerini (kayıt)** temsil eder.
+
+Bu yapı, veri analizi için evrensel bir standarttır.
+
+---
+
+## 2. Bölüm: Hızlı Veri İnceleme ve Düzenleme
+
+Veri setleri büyüdükçe hızlı hareket edebilmek kritik hâle gelir. Excel’de zaman kazandıran bazı kısayollar:
+
+### 🔹 Hızlı Tarama Kısayolları
+- **Ctrl + Shift + Aşağı/Yukarı:** Bulunduğun sütunda ilk–son dolu hücreyi tarar.  
+- **Ctrl + Shift + Sağ/Sol:** Aynı işlevi yatayda yapar.  
+- **Ctrl + A:** Bitişik tüm veri bloğunu seçer.
+
+### 🔹 Sütun/Satır Gizleme
+- Sağ tık → **Gizle (Hide)**
+- Gizli alanı geri getirmek için sağ tık → **Göster (Unhide)**
+
+---
+
+## 3. Bölüm: Başlıkları Sabitleme (Freeze Panes)
+
+Büyük veri listelerinde kaydırma yaparken başlıkları sabitlemek için:
+
+- **Üst Satırı Dondur:** Görünüm → Bölmeleri Dondur → *Üst Satırı Dondur*  
+- **İlk Sütunu Dondur:** Aynı menüden *İlk Sütunu Dondur*  
+- Hem satır hem sütun için: Sabitlemek istediğin noktanın *altındaki ve sağındaki hücreyi* seç → *Bölmeleri Dondur*
+
+---
+
+## 4. Bölüm: Filtreleme ve Veri Dönüşümü
+
+### 🔹 Filtreleme
+1. Veri bloğunu **Ctrl + A** ile seç.  
+2. Giriş → Sırala ve Filtrele → **Filtre**
+
+Başlıklarda açılır oklar belirir ve veriyi koşullara göre süzebilirsin.
+
+### 🔹 Devrik Dönüşüm (Transpose)
+- Veriyi kopyala → Yeni alanda sağ tık → **Özel Yapıştır → Devrik Dönüşüm**
+
+---
+
+## 5. Bölüm: Metin İşleme Fonksiyonları
+
+Excel’de metin temizlemek ve dönüştürmek için güçlü fonksiyonlar bulunur.
+
+###  TEXTSPLIT — Metin Bölme
+```excel
+=TEXTSPLIT(P2; "/")
+```
+
+“08/10/2025” → Gün | Ay | Yıl olarak ayrılır.
+
+###  Metni Birleştirme — CONCATENATE, TEXTJOIN, &
+## & İşaretiyle:
+```excel
+=A2 & " " & B2
+```
+A2 ve B2 hücrelerini arada boşlukla birleştirir.
+
+## TEXTJOIN ile (Ayraç Belirterek):
+```excel
+=TEXTJOIN(" / "; DOĞRU; C2; D2; E2)
+```
+
+Boş hücreleri yok sayarak C2, D2, E2 değerlerini “ / ” ile birleştirir.
+
+Karakter Sayısı ve Metin Kısıtlama
+```excel
+LEFT: =LEFT(A2, 7) → Metnin soldan başlayarak ilk 7 karakterini alır.
+RIGHT: =RIGHT(A2, 5) → Metnin sağdan başlayarak son 5 karakterini alır.
+MID: =MID(A2, 3, 4) → Metnin ortasından, 3. karakterden başlayarak 4 karakter getirir.
+LOWER: =LOWER(A2) → Metindeki tüm harfleri küçük yapar.
+UPPER: =UPPER(A2) → Metindeki tüm harfleri büyük yapar.
+LEN: =LEN(A2) → Metindeki toplam karakter sayısını verir.
+```
+İç İçe Fonksiyon Örneği:
+```excel
+=LOWER(LEFT(A2&B2; 7))
+```
+A2 ve B2’yi birleştirir, ilk 7 karakterini alır ve küçük harfe çevirir.
+
+### 5. Otomatik Seri Oluşturma — SEQUENCE
+Belirli bir başlangıç noktasından itibaren düzenli artan seriler oluşturur.
+
+## Sayı Serisi:
+```excel
+=SERİ(24; 1; 1; 1)
+```
+1’den başlayarak 24 satır boyunca 1’er artar.
+
+## Tarih Serisi:
+```excel
+=SERİ(24; 1; DATE(2025;10;22); 7)
+```
+22.10.2025’ten başlayarak her 7 günde bir tarih oluşturur.
+Not: Hücre biçimi “Tarih” olmalıdır.
+
+### 6. Hücre Sabitleme ve Adlandırma
+Büyük tablolarda formülleri aşağı doğru kopyaladığınızda, bazı değerlerin (örneğin sabit bir prim oranı) kaymasını istemeyebilirsiniz. İşte bu durumda hücre sabitleme ve adlandırma devreye girer.
+
+## A. Hücre Sabitleme ($ İşareti)
+Bir formülde belirli bir hücre adresinin sabit kalmasını sağlar.
+Örneğin, D1 hücresindeki değeri sabitlemek istiyorsanız, $ işareti kullanılır.
+
+##### Nasıl Yapılır: 
+Hücre adresini yazdıktan sonra F4 tuşuna basarak adresi $D$1 formatına getirebilirsiniz.
+Bu sayede formülü nereye kopyalarsanız kopyalayın, Excel her zaman D1 hücresindeki değeri kullanır.
+
+📌 Örnek:
+$D$1 → Hem sütun hem satır sabittir.
+
+## B. Hücre Adlandırma (Name Box)
+
+Formülleri daha anlaşılır ve yönetilebilir hale getirmenin en pratik yoludur.
+
+
+Nasıl Yapılır: Sabit değerinizin bulunduğu hücreye (örneğin C3) tıklayın ve Excel’in sol üst köşesindeki Name Box’a giderek “Prim_Orani” gibi anlamlı bir isim verin.
+
+Artık formülünüzü şu şekilde yazabilirsiniz:
+```excel
+=B3 * Prim_Orani
+```
+
+💡 Avantaj: Adlandırılmış hücreler otomatik olarak sabitlenir ve $ işareti kullanmanıza gerek kalmaz. Ayrıca formüller çok daha okunabilir hale gelir.
+
+Excel’de İleri Veri Analizi ve Pratik Uygulamalar
+Temel düzeyden sonra, veri analistlerinin en çok kullandığı araçlar XLOOKUP, Pivot Table ve profesyonel grafik şablonlarıdır.
+
+## 1. XLOOKUP — Hücreler Arası Hızlı Sorgulama
+Bu fonksiyon, eski VLOOKUP fonksiyonunun gelişmiş halidir.
+Bir tabloda bir değeri arayıp, o değere karşılık gelen sonucu başka bir sütundan getirir.
+
+Avantajları:
+
+Hem sağa hem sola doğru arama yapabilir (VLOOKUP sadece sağa bakabiliyordu).
+Sadece iki aralık (range) ister: biri aranan sütun, diğeri sonuç sütunu.
+Hataları kolayca yönetebilirsin (“bulunamadı” gibi mesajlar gösterebilir).
+Örnek:
+```excel
+=XLOOKUP(H2, C:C, F:F
+```
+
+Bu formül şu anlama gelir:
+
+H2 hücresindeki değeri (örneğin bir öğrencinin adı)
+C sütununda ara,
+F sütunundaki karşılık gelen değeri getir (örneğin öğrencinin not ortalaması).
+Hata yönetimi eklemek:
+```excel
+=XLOOKUP(H2, C:C, H:H, "Burs almamaktadır")
+```
+Eğer H2’deki öğrenci C sütununda bulunamazsa, Excel “Burs almamaktadır” yazar.
+
+## 2. Pivot Table — Veriyi Özetleme
+
+Pivot Table (Özet Tablo), büyük veri listelerini saniyeler içinde özetlemeni sağlar.
+Mesela 10.000 satırlık satış listesinden “şehir bazında toplam satış” gibi bir tabloyu hemen oluşturabilirsin.
+
+#### Nasıl Yapılır:
+Veriyi seç → Ctrl + T ile tabloya dönüştür.
+Ekle (Insert) sekmesine git → PivotTable seç.
+“Yeni Çalışma Sayfası” de → Tamam.
+Açılan PivotTable alanlarında:
+Rows (Satırlar): “Şehir” gibi kategorik bir sütun seç.
+Columns (Sütunlar): “Cinsiyet” gibi ikinci bir kategori ekle.
+Values (Değerler): “Toplam Satış” gibi sayısal bir sütun ekle.
+Filters (Filtreler): Genel filtreler eklemek için kullan.
+
+#### Özelleştirme:
+Sağ tık → Değer Alanı Ayarları (Value Field Settings) → “Toplam”, “Ortalama”, “Sayım”, “En Büyük” gibi hesaplama türlerini değiştirebilirsin.
+Satır/Sütun Değiştir (Switch Row/Column): Pivot tablonun görünümünü tek tıkla ters çevirebilirsin.
+
+#### Yani özetle:
+XLOOKUP → Tablo içinde bir değeri arayıp, karşılığını getirir.
+Pivot Table → Büyük veriyi gruplayıp özetler, analiz etmeyi kolaylaştırır.
+Analizin son aşaması veriyi etkili görselleştirmektir.
+
+#### Grafik Tipleri:
+Pasta (Pie): Oranları gösterir.
+Sütun/Çubuk (Column/Bar): Kategoriler arası karşılaştırma yapar.
+Oluşturmak için: Veriyi seç → Ekle sekmesi → Grafik türünü seç.
+
+### Görsel Biçimlendirme İpuçları
+
+Grafiklerinizi ham halden sunuma hazır profesyonel bir görünüme kavuşturmak için şu adımları izleyin:
+
+* **Veri Etiketleri (Data Labels):** Grafiğe sağ tıklayıp **“Veri Etiketleri Ekle”** (Add Data Labels) diyerek değerlerin doğrudan barların üzerinde görünmesini sağlayın.
+* **Renk ve Çerçeve:** Grafiğe çift tıklayarak sağ menüdeki **Şekil Biçimi** (Shape Format) sekmesini açın. Buradan dolgu ve kenarlık ayarlarını yönetebilirsiniz.
+* **Kurumsal Renk Kullanımı (Hex Code):** Standart renkler yerine marka renklerinizi kullanmak için **“Diğer Dolgu Renkleri…”** menüsüne gidin ve Hex kodunu (örn: `#FF5733`) girin.
+
+#### 1. Standartlaştırma: Grafik Şablonu Oluşturma (Çok Önemli!)
+
+Raporlarınızda görsel tutarlılığı sağlamak ve her seferinde sıfırdan ayar yapmamak için şablonları kullanın.
+
+1.  **Şablonu Kaydetme:** Biçimlendirmesini tamamladığınız (renk, font, kenarlık ayarları bitmiş) grafiğe sağ tıklayın ve **“Şablon Olarak Kaydet”** (Save as Template) seçeneğini tıklayın. Anlaşılır bir isim verin (Örn: `Sutun_Mavi_V1`).
+2.  **Şablonu Uygulama:** Yeni bir ham grafik oluşturduğunuzda, grafiğe sağ tıklayın -> **“Grafik Türünü Değiştir”** -> **“Şablonlar”** klasörüne gidin. Kaydettiğiniz tasarımı seçerek saniyeler içinde uygulayın.
+
+
+
+#### 2. Kalite Kaybını Önleme (SVG Formatı)
+
+Excel’den Word veya PowerPoint’e kopyalanan görsellerde genellikle pikselleşme (çözünürlük kaybı) yaşanır. Bunu önlemenin profesyonel yolu **SVG** kullanmaktır.
+
+**Yüksek Kaliteli Kayıt Adımları:**
+1.  Grafiğe sağ tıklayın -> **“Resim Olarak Kaydet”** (Save as Picture).
+2.  Kayıt türü olarak **SVG (Scalable Vector Graphics)** formatını seçin.
+3.  Bu dosyayı Word/PowerPoint belgenize **Ekle -> Resimler** menüsü üzerinden dahil edin.
+
+> **Neden SVG?** Vektörel bir format olduğu için görseli sunumda ne kadar büyütürseniz büyütün, görüntü asla bozulmaz ve net kalır.
+
+---
+
+## 4. Veri Yönetimi, Versiyonlama ve Kayıt Düzeni
+
+Bir veri analisti için analiz kadar önemli olan diğer konu, dosya yönetimi ve veri güvenliğidir. Emeğinizin kaybolmaması için "Versiyonlama Prensibi"ni uygulayın.
+
+**Önerilen Dosya İsimlendirme Yapısı:**
+
+```text
+ProjeAdi_V1.xlsx   -> İlk Taslak
+ProjeAdi_V2.xlsx   -> Revize Edilmiş Hali
+ProjeAdi_V2a.xlsx  -> V2 üzerindeki ufak değişiklik
+ProjeAdi_V3.xlsx   -> Büyük değişiklik sonrası yeni ana sürüm
+
+[👉 **Medium'da Oku: Excel ve Modern Veri Girişi Mantığı**](https://medium.com/@zeynepbsgl078/veri-analizi-okulu-hafta-3-745ebd6de9cb)

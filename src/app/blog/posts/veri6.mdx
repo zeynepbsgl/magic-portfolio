@@ -1,0 +1,104 @@
+---
+title: "İstatistiğin Temelleri: Veriyi Anlama ve Çıkarım Gücü"
+subtitle: "Veri Analizi Okulu Notları - 6"
+summary: "Betimleyici ve çıkarımsal istatistik farkları, standart sapma, normal dağılım, Merkezi Limit Teoremi (CLT) ve Standart Hata kavramlarına kapsamlı bir bakış."
+image: "/images/projects/blog/population.png"
+publishedAt: "2025-11-19"
+tag: "İstatistik & Veri Bilimi"
+---
+
+[👉 **Medium'da Oku: İstatistiğin İki Yüzü**](https://medium.com/@zeynepbsgl078/veri-analizi-okulu-hafta-6-45daf1f1c5d4)
+
+İstatistik, büyük veri yığınlarını yönetmek ve onlardan anlam çıkarmak için kullanılan bir **özetleme mekanizmasıdır**. Temelde iki tür analizden oluşur.
+
+## I. İstatistiğin İki Yüzü: Betimleme ve Çıkarım
+
+### 1. Betimleyici İstatistik (Descriptive Statistics)
+Elimizdeki **mevcut veri setini** (örneklem veya popülasyon) özetlemek ve tanımlamak için kullanılır.
+* **Amaç:** “Veri setinde durum nedir?” sorusuna cevap aramaktır.
+* **Örnek:** Sınıfın ortalaması kaçtır? En yüksek not nedir?
+
+### 2. Çıkarımsal İstatistik (Inferential Statistics)
+Küçük bir **örneklemden** elde edilen verileri kullanarak, asıl büyük **evren (popülasyon)** hakkında genellemeler ve tahminler yapmaya çalışır.
+* **Özellik:** Bu analiz **tamamen ihtimale dayalıdır**.
+* **Sonuç:** Genellikle **hata payları** veya **güven aralıkları** ile ifade edilir.
+
+---
+
+## II. Veri Özetlemenin Temel Ölçüleri: Merkez ve Yayılım
+
+İstatistiksel özetleme, iki temel bilgi etrafında döner: verilerin nerede toplandığı (**Merkezi Eğilim**) ve bu toplanma noktasından ne kadar yayıldığı (**Dağılım**).
+![Excel Fonksiyonları](/images/projects/blog/merkezieğilim.png)
+
+
+### B. Dağılımın Önemi: Neden Sadece Ortalama Yetmez?
+Ortalamaları aynı olan iki veri setinin dağılımı tamamen farklı olabilir.
+
+> **Örnek:** Hukuk sınıfında herkes 50 alırken (Ortalama 50), Tarih sınıfında yarısı 10, yarısı 90 alabilir (Ortalama yine 50).
+
+Dağılımın şekli (simetrik, çarpık, bimodal) ve **aykırı değerlerin** varlığı, ortalamanın temsiliyet yeteneğini belirler.
+
+**İdeal dağılım (Normal Dağılım):**
+![Excel Fonksiyonları](/images/projects/blog/sarı.png)
+
+
+[Image of standard normal distribution bell curve]
+
+
+---
+
+## III. İstatistiğin Temel Taşı: Standart Sapma ve Normal Dağılım
+
+### 1. Standart Sapma
+<img src="/images/projects/blog/fi.png" alt="Excel Fonksiyonları" width="300" />
+
+<img src="/images/projects/blog/s.png" alt="Excel Fonksiyonları" width="300" />
+
+
+Dağılım ölçülerinin en yaygınıdır. Bir veri setindeki her bir gözlemin, **aritmetik ortalamadan uzaklıklarının ortalaması** olarak düşünülebilir.
+
+* **Yüksek Standart Sapma:** Veriler merkezden uzaktır, değişkenlik **yüksektir**.
+* **Düşük Standart Sapma:** Veriler merkeze yakındır, değişkenlik **düşüktür**.
+* **Varyans ($s^2$):** Karekök alınmadan önceki değerdir. Sapmaların kareleri alınarak artı/eksi işaretlerinin birbirini götürmesi engellenir. Varyans, regresyon ve ANOVA gibi modellemelerin temel girdisidir.
+
+### 2. Normal Dağılım ve Empirik Kural
+**Normal Dağılım (Çan Eğrisi)**, verilerin simetrik bir şekilde ortada toplandığı ve standart sapmanın bir **ölçü birimi** olarak kullanıldığı dağılımdır.
+![Excel Fonksiyonları](/images/projects/blog/62.png)
+![Excel Fonksiyonları](/images/projects/blog/mavigrafik.png)
+
+
+### 3. Z-Skoru (Standardize Skor)
+Farklı dağılımlardaki skorları kıyaslamak için kullanılır. Bir gözlemin, kendi ortalamasına **kaç standart sapma** uzaklıkta olduğunu gösterir.
+<img src="/images/projects/blog/z.png" alt="Excel Fonksiyonları" width="300" />
+
+Bu skor, bir öğrencinin kendi sınıf ortalamasına göre $Z=+2$ (iki standart sapma yukarıda) veya $Z=-0.5$ (yarım standart sapma aşağıda) konumunda olduğunu göstererek ham puan kıyaslamasından daha anlamlı bir değerlendirme sağlar.
+
+---
+
+## IV. Çıkarımsal İstatistiğin İskeleti: CLT ve Standart Hata
+
+### 1. Merkezi Limit Teoremi (CLT)
+Bu teorem, istatistiğin temelidir: Orijinal popülasyonun dağılımı **ne olursa olsun**, ondan çekilen **çok sayıdaki örneklemin ortalamaları** her zaman **Normal Dağılıma** yaklaşır.
+![Excel Fonksiyonları](/images/projects/blog/dist.png)
+
+
+
+* **Sonuç:** Bu normalleşmiş dağılım sayesinde, orijinal verimiz normal olmasa bile, popülasyonun ortalamasını yüksek güvenilirlikle tahmin edebiliriz.
+* **Etki:** Örneklem sayısı (N) arttıkça ortalamaların dağılımının yayılımı (varyansı) azalır, bu da tahminlerimizi **daha isabetli** yapar.
+
+### 2. Standart Hata (Standard Error - SE)
+Merkezi Limit Teoremi ile oluşan ve daralmış olan bu yeni dağılımın (örneklem ortalamalarının dağılımı) standart sapmasına **Standart Hata (SE)** denir.
+
+![Excel Fonksiyonları](/images/projects/blog/see.png)
+
+* **SE’nin Amacı:** Örneklem ortalamamızın popülasyonun gerçek ortalamasından sapmasını tahmin eder. Çıkarımsal istatistikte kullanılır.
+* **Güçlü Yönü:** Formülde örneklem sayısı (N) paydada olduğu için, **örneklem büyüklüğü arttıkça, SE değeri küçülür**, bu da hatanın azalması ve tahmin güvenilirliğinin artması demektir.
+
+### 3. Popülasyon Güven Aralığı ve Hata Payı
+Standart Hata, popülasyon parametresinin nerede olduğunu tahmin eden **Güven Aralığının** hesaplanmasında kullanılır.
+
+
+![Excel Fonksiyonları](/images/projects/blog/dist2.png)
+![Excel Fonksiyonları](/images/projects/blog/hatapayı.png)
+### Özet
+İstatistiksel anlamlılık ve modelleme; **Standart Sapma** ile iç değişkenliği anlayıp, bunu **Merkezi Limit Teoremi** ile **Standart Hataya** dönüştürerek popülasyon hakkında güvenilir genellemeler yapma sürecidir. Bu temel kavramlar, veri analizi yolculuğunuzun en kritik kilometre taşlarıdır.

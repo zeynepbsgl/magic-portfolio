@@ -1,0 +1,90 @@
+---
+title: "Zirve Deri: Freelance End-to-End E-Commerce Architecture"
+summary: "A scalable e-commerce platform developed with .NET Core and React, featuring a modern interface, advanced variant management, PayTR payment infrastructure, and automated email systems."
+publishedAt: "2025-12-10"
+images:
+  - "/images/projects/project-01/zirve.png"
+  - "/images/projects/project-01/zirveindirim.png"
+  - "/images/projects/project-01/zirveshop.png"
+  - "/images/projects/project-01/admin.png"
+  - "/images/projects/project-01/varyant.png"
+  - "/images/projects/project-01/adminürünler.png"
+
+
+
+
+
+team:
+  - name: "Zeynep Basoglu"
+    role: "Full-Stack Developer"
+    avatar: "/images/vize.jpg"
+    linkedIn: "https://www.linkedin.com/in/zeynep-ba%C5%9Fo%C4%9Flu-181872229/"
+link: "https://www.zirvederi.com.tr/"
+---
+
+## Project Overview
+
+Zirve Deri is a "Production-Grade" software project developed to break free from the limitations of standard off-the-shelf e-commerce packages and provide a completely brand-specific experience.
+
+This project is not just a product sales site; it is an integrated system designed with every detail in mind, from stock management to payment security, and from cargo tracking to the design of emails sent to customers.
+
+---
+
+### 1. Modern UI & User Experience (Frontend)
+
+**React** and **TypeScript** technologies were used to provide users with a fast and fluid shopping experience without leaving the site.
+
+* **Responsive Design:** A modern interface coded with a "Mobile-First" approach that looks flawless on desktops, tablets, and mobile devices.
+* **Fast Navigation:** Ability to switch between products without refreshing the page (SPA - Single Page Application).
+* **Dynamic Filtering:** An instant filtering system that allows users to find what they are looking for among hundreds of leather products by size, color, and category within seconds.
+
+---
+
+### 2. Complex Variant Management
+
+The biggest technical challenge in leather goods (belts, wallets, etc.) is having multiple variations of a single product (e.g., 110cm Black, 120cm Brown).
+
+* **Database Architecture:** By establishing "One-to-Many" relationships in the relational database (MSSQL), the stock of each variant was made trackable individually.
+* **Stock Control:** When a customer selects a 110cm belt, the system checks the stock of only that variant in the background. If the stock is out, the "Add to Cart" button is automatically disabled.
+![Zirve Deri Shop Page & Filters](/images/projects/project-01/varyant.png)
+---
+
+### 3. Secure Payment Infrastructure with PayTR
+
+Full integration was achieved with **PayTR**, one of Turkey's leading payment institutions, for the security of financial transactions.
+
+* **iFrame Integration:** Credit card information is not stored on our server; it is processed directly through PayTR's secure iFrame structure (PCI-DSS compliance).
+* **Callback (Webhook) Validation:** When the "success" signal is received from PayTR upon completion of the payment, a hash validation (token validation) is performed in the background to verify the transaction, and the order is created only after this security step.
+
+---
+
+### 4. Cargo Integration and Operational Management
+
+The process from receiving the order to delivering it to the customer is managed through a specially developed **Admin Panel**.
+
+* **Cargo Tracking Integration:** When the order is shipped, the tracking number entered from the admin panel is processed into the system.
+* **Order Status Management:** Statuses such as "Preparing", "Shipped", and "Delivered" are updated by the administrator, and these updates are instantly reflected on the customer's profile page.
+
+---
+
+### 5. Modern HTML Email Notifications
+
+Professional **HTML Templates** were used instead of ordinary text messages to prevent emails sent to customers from falling into spam and to ensure a corporate look.
+
+* **Automatic Triggers:**
+    * **Order Confirmation:** As soon as payment is received, a stylish email containing the order summary and product images is sent to the customer.
+    * **Cargo Notification:** When the product is shipped, an information email containing the tracking link is automatically sent.
+* **Technology:** Using the `MailKit` library on the backend and a dynamic HTML render engine, personalized content (e.g., Dear [Customer Name]) is generated.
+
+<img
+  src="/images/projects/project-01/mail.png"
+  alt="Mail Gönderim Örneği"
+  width="300"
+  style={{ borderRadius: '8px', margin: '20px auto', display: 'block' }}
+/>
+
+---
+
+## Conclusion
+
+The Zirve Deri project is concrete proof of how modern web technologies provide solutions to real-world problems. It is an end-to-end, living system driven by a customer-first Frontend structure and a Backend architecture that guarantees data consistency.

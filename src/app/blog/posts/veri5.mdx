@@ -1,0 +1,85 @@
+---
+title: "SPSS ile Veri Manipülasyonu: Veriyi Tanıma ve Dönüştürme"
+subtitle: "Veri Analizi Okulu Notları - 5"
+summary: "SPSS'te veri setini tanıma, frekans ve betimleyici analizler, Recode ve Compute işlemleriyle veri dönüşümü ve ters kodlama teknikleri."
+image: "/images/projects/blog/hapiness.png"
+publishedAt: "2025-11-12"
+tag: "SPSS & Veri Analizi"
+---
+
+## Bölüm 1: Veri Setini Tanıma ve Temel Betimleyici Analizler
+
+Veri setindeki değişkenlerin yapısını anlamak, doğru analizi seçmenin ilk adımıdır.
+
+### 1.1. SPSS Arayüzünün Rolü
+**Veri Görünümü (Data View):** Gözlemlerin (satırlar) ve değişkenlerin (sütunlar) bulunduğu tablodur. Buradaki sayılar ve değerler, katılımcıların gerçek cevaplarıdır.
+
+**Değişken Görünümü (Variable View):** Veri setinin meta verisidir. Değişkenin adını, etiketini, veri tipini, özellikle de **Value Labels (Değer Etiketleri)** ve **Missing Values (Kayıp Değerler)** gibi hayati tanımlamaları içerir. Her analize buradan başlanmalıdır.
+
+### 1.2. Frekans Analizi: Kategorik Veriyi Özetleme
+Frekans analizi, **Nominal** ve **Ordinal** düzeydeki (kategorik) değişkenlerin dağılımını gösterir.
+
+**İşlem Yolu (Menü):** `Analyze -> Descriptive Statistics -> Frequencies...`
+
+![Excel Fonksiyonları](/images/projects/blog/nvalid.png)
+
+**Görselleştirme:** Frequencies menüsündeki **Charts** seçeneği ile Sütun Grafikleri (Bar Charts) veya Pasta Grafikleri (Pie Charts) oluşturmak, dağılımı hızlıca anlamayı sağlar.
+
+![Excel Fonksiyonları](/images/projects/blog/statistic.png)
+### 1.3. Betimleyici İstatistikler: Sayısal Veriyi Özetleme
+**Interval** veya **Ratio** düzeydeki (sürekli/sayısal) değişkenlerin merkez eğilimini ve yayılımını (dağılımını) analiz etmek için kullanılır.
+
+**İşlem Yolu (Menü):** `Analyze -> Descriptive Statistics -> Descriptives...`
+
+![Excel Fonksiyonları](/images/projects/blog/mean.png)
+
+**Kritik Not (Çoklu Analiz):** `Descriptives` çıktısındaki **Listwise N**, analiz edilen tüm değişkenlerde ortak geçerli verisi olan katılımcı sayısını gösterir. Bu, ilişki testlerine (korelasyon, regresyon) başlamadan önce kaç katılımcı ile çalıştığınızı bilmek için hayati öneme sahiptir.
+
+![Excel Fonksiyonları](/images/projects/blog/yas.png)
+
+## Bölüm 2: Veri Dönüşümü ve Hazırlık Teknikleri (Transform)
+
+Ham veriyi analitik modellere uygun hale getirmek, veri dönüşümünün ana görevidir.
+
+### 2.1. Kategorileri Yeniden Kodlama (RECODE)
+Recode, kategorik bir değişkenin gruplarını azaltmak veya mevcut bir değişkenin kodlama sırasını değiştirmek için kullanılır. Orijinal veriyi korumak için daima **Recode into Different Variables** (Farklı Değişkenlere Kodla) seçeneği tercih edilmelidir.
+
+**Gereklilik:** 9 farklı eğitim seviyesini (İlkokul, Ortaokul, Lise, MYO, Lisans, Y. Lisans vb.) 3 ana düzeye (Temel, Lise, Yükseköğrenim) indirmek.
+
+**Ayrıntılı Syntax Yapısı:**
+![Excel Fonksiyonları](/images/projects/blog/temporary.png)
+
+![Excel Fonksiyonları](/images/projects/blog/temporary2.png)
+
+![Excel Fonksiyonları](/images/projects/blog/thru.png)
+
+### 2.2. Matematiksel Hesaplama (COMPUTE)
+`COMPUTE` komutu, dört işlem, mantıksal ve istatistiksel fonksiyonlar kullanarak yeni sayısal değişkenler türetmek için kullanılır.
+
+**Gereklilik:** İki ebeveynin eğitim puanlarını toplayarak bir “Aile Eğitim Skoru” oluşturmak veya evlilik yılını hesaplamak.
+
+* COMPUTE ile Evlilik Yılını Bulma (Anket Yılı - Evli Kalınan Süre)
+```excel
+COMPUTE Marriage_Year = 2024 - Sur_Year.
+VARIABLE LABELS Marriage_Year 'Evlilik Başlangıç Yılı'.
+```
+
+
+### 2.3. Ters Kodlama (Reverse Coding): Ölçek Bütünlüğü
+ Ölçek (skala) bazlı araştırmalarda, bazı maddeler (Örn: “Mutlu hissettim”) olumlu, bazıları (“Yalnız hissettim”) olumsuz yönde sorulur. Toplam bir skor elde etmek için, zıt yönde kodlanmış maddelerin anlamını tersine çevirmek gerekir.
+ **Neden Gerekli?** Aksi takdirde, olumlu ve olumsuz maddeler birbirini götürür ve elde edilen toplam skor anlamsızlaşır.
+ **Yöntem A: **RECODE Kullanımı
+ Kategorik değerleri tek tek ters eşleştirir. Basit ve küçük skalalar için uygundur.
+ ```excel
+RECODE welhappy (1=4) (2=3) (3=2) (4=1) INTO Happy_R1.
+EXECUTE.
+```
+![Excel Fonksiyonları](/images/projects/blog/wellhappy.png)
+**Yöntem B: COMPUTE ile Matematiksel Yöntem (Hızlı ve Güvenilir)**
+Büyük skalalar (1–10 veya 1–100) için en etkili yoldur.
+![Excel Fonksiyonları](/images/projects/blog/formül.png)
+```excel
+Örnek: 1'den 4'e giden ölçek için (4 + 1 = 5)ExcelCOMPUTE Happy_R2 = 5 - welhappy.
+EXECUTE.
+```
+**Kontrol:** * Orijinal değeri 1 olan bir katılımcı için hesaplama: $5–1 = 4$.Orijinal değeri 4 olan bir katılımcı için hesaplama: $5–4 = 1$.Ters çevirme işlemi başarılıdır.

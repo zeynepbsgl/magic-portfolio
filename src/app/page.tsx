@@ -10,6 +10,7 @@ import {
   Schema,
   Meta,
   Line,
+  IconButton,
 } from "@once-ui-system/core";
 import { home, about, person, baseURL, routes } from "@/resources";
 import { Mailchimp } from "@/components";
@@ -76,27 +77,59 @@ export default function Home() {
             </Text>
           </RevealFx>
           <RevealFx paddingTop="12" delay={0.4} horizontal="center" paddingLeft="12">
-            <Button
-              id="about"
-              data-border="rounded"
-              href={about.path}
-              variant="secondary"
-              size="m"
-              weight="default"
-              arrowIcon
-            >
-              <Row gap="8" vertical="center" paddingRight="4">
-                {about.avatar.display && (
-                  <Avatar
-                    marginRight="8"
-                    style={{ marginLeft: "-0.75rem" }}
-                    src={person.avatar}
-                    size="m"
+          <Row gap="16" vertical="center" s={{ direction: "column" }}>
+              
+              {/* Mevcut About Butonu */}
+              <Button
+                id="about"
+                data-border="rounded"
+                href={about.path}
+                variant="secondary"
+                size="m"
+                weight="default"
+                arrowIcon
+              >
+                <Row gap="8" vertical="center" paddingRight="4">
+                  {about.avatar.display && (
+                    <Avatar
+                      marginRight="8"
+                      style={{ marginLeft: "-0.75rem" }}
+                      src={person.avatar}
+                      size="m"
+                    />
+                  )}
+                  {about.title}
+                </Row>
+              </Button>
+
+              {/* Yeni Eklenen Resume İndirme Alanı */}
+              {about.calendar.display && (
+                <Row
+                  fitWidth
+                  border="brand-alpha-medium"
+                  background="brand-alpha-weak"
+                  radius="full"
+                  padding="4"
+                  gap="8"
+                  vertical="center"
+                  style={{
+                    backdropFilter: "blur(var(--static-space-1))",
+                  }}
+                >
+                  <Row paddingLeft="16" paddingRight="8">
+                    Download Resume
+                  </Row>
+                  <IconButton
+                    href={about.calendar.link}
+                    download
+                    target="_blank"
+                    data-border="rounded"
+                    variant="secondary"
+                    icon="download"
                   />
-                )}
-                {about.title}
-              </Row>
-            </Button>
+                </Row>
+              )}
+            </Row>
           </RevealFx>
         </Column>
       </Column>

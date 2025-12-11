@@ -1,0 +1,109 @@
+---
+title: "Veriyi Keşfetmek ve Syntax Gücü: İleri Manipülasyon"
+subtitle: "Veri Analizi Okulu Notları - 7"
+summary: "Veri keşfi (Explore), Stem-and-Leaf ve Box Plot yorumlama, Syntax kullanımı, mantıksal operatörler (IF/ELSE) ve güvenilir ölçek oluşturma teknikleri."
+image: "/images/projects/blog/bar.png"
+publishedAt: "2025-11-26"
+tag: "SPSS & Veri Yönetimi"
+---
+
+[👉 **Medium'da Oku: Veriyi Keşfetme ve Syntax**](https://medium.com/@zeynepbsgl078/veri-analizi-okulu-7-hafta-5f66b6772d49)
+
+## 1. Veriyi Tanımak: “Elimizde Ne Var?”
+Veri setini açar açmaz analize dalmak, derinliğini bilmediğiniz havuza atlamak gibidir. Önce veriyi “keşfetmeliyiz” (Explore).
+
+SPSS’te `Analyze > Descriptive Statistics > Explore` yolunu izlediğimizde karşımıza iki kritik grafik çıkar:
+
+### A. Stem-and-Leaf (Gövde ve Yaprak)
+Bu grafik, sayıların oluşturduğu bir histogram gibidir. Verinin röntgenini çekmek gibidir.
+![Excel Fonksiyonları](/images/projects/blog/numaralar.png)
+
+* **Örnek:** Grafikte `1. 888` görüyorsanız, bu 18 yaşında birden fazla kişi olduğunu gösterir.
+
+
+
+### B. Box Plot (Kutu Grafiği)
+Verinin “göbeğini” ve uçlarını gösterir.
+* **Kutu (Box):** İnsanların çoğunun (örneğin %50'sinin) hangi aralıkta toplandığını gösterir.
+* **Çizgiler (Whiskers):** En düşük ve en yüksek değerleri gösterir.
+* **Yorum:** Bu grafiklere bakarak verinin düzgün mü dağıldığını (Normal Dağılım) yoksa bir tarafa mı yığıldığını (Çarpıklık) anlarız.
+
+
+![Excel Fonksiyonları](/images/projects/blog/bar.png)
+
+
+---
+
+## 2. Neden Menüler Yerine “Kod” (Syntax) Yazmalıyız?
+SPSS’in butonlarına basmak kolaydır, ama profesyonel dünyada **Syntax** (kod yazma) penceresi hayat kurtarır.
+
+* **Hız:** 100 farklı işlemi tek tıkla yapabilirsiniz.
+* **Hafıza:** 6 ay sonra “Ben bu veriyi nasıl düzenlemiştim?” diye düşünmezsiniz, kod orada yazılıdır.
+* **Güvenlik:** Ana verinizi bozmadan denemeler yapabilirsiniz.
+
+---
+
+## 3. Karmaşık Gruplar Oluşturmak: Mantıksal Operatörler (IF)
+Bazen elimizdeki tek bir soru yetmez.
+
+**Araştırma Sorusu:** “Köyde yaşayan kadınlar ile büyükşehirde yaşayan erkeklerin tutumları farklı mı?”
+
+Elimizde iki ayrı değişken var:
+1. **Cinsiyet:** Kadın / Erkek
+2. **Yerleşim Yeri:** Köy / Kasaba / Şehir
+
+Bunları tek tek analiz etmek yerine, bu iki bilgiyi birleştirip yeni bir “Kimlik” değişkeni oluşturabiliriz. Mantığı şudur: *“Eğer kişi Erkek VE Köyde yaşıyorsa, ona ‘Köylü Erkek’ etiketi yapıştır.”*
+
+
+
+```excel
+IF (Cinsiyet = 1 AND Yerleşim = 1) YeniGrup = 1.  /* Köyde Yaşayan Erkek */
+IF (Cinsiyet = 2 AND Yerleşim = 1) YeniGrup = 2.  /* Köyde Yaşayan Kadın */
+IF (Cinsiyet = 1 AND Yerleşim = 3) YeniGrup = 3.  /* Şehirde Yaşayan Erkek */
+EXECUTE.
+```
+Bu işlem sayesinde, yüzlerce satırlık karmaşık veriyi, analiz etmesi kolay, net kategorilere indirgemiş oluruz.
+
+3. Koşullu Temizlik: DO IF ve ELSE Yapısı
+Bazen kurallarımız daha karmaşık olabilir. Örneğin yaş grupları oluştururken zincirleme bir mantık kurmamız gerekir.
+
+* “25 yaşından küçükse ‘Genç’ de.”
+* “Değilse ama 65 yaşından büyükse ‘Yaşlı’ de.”
+* “Hiçbiri değilse (yani aradaysa) ‘Orta Yaş’ de.”
+
+İşte burada DO IF (Eğer buysa yap), ELSE IF (Yok o değil de buysa yap) ve ELSE (Hiçbiri değilse bunu yap) komutları devreye girer. Bu yapı, veriyi "if-then-else" mantığıyla ilmik ilmik işlememizi sağlar.
+
+## 4. Ölçek Oluşturma: Elmalarla Armutları Toplamamak
+Anketlerde en sık yapılan hatalardan biri, soruları doğrudan toplayıp ortalama almaktır. Önce şu iki kritik adımı atlamamak gerekir:
+
+## Adım A: Ters Kodlama (Reverse Coding)
+Diyelim ki “Ruh Sağlığı” üzerine bir ölçek hazırladınız.
+
+* Soru 1: “Ne kadar mutlusunuz?” (1: Çok Mutlu … 4: Çok Mutsuz) -> Burada yüksek puan kötü.
+
+* Soru 2: “Ne kadar depresifsiniz?” (1: Hiç … 4: Çok) -> Burada yüksek puan kötü.
+Bir dakika! Soru 1'de 4 puan “Mutsuzluk” iken, başka bir soruda 1 puan “Mutluluk” olabilir. Eğer bunları düzeltmeden toplarsanız, sonuç anlamsız olur. Pozitif ve negatif soruları aynı yöne çevirmelisiniz (Ters Kodlama).
+
+```excel
+RECODE degisken (1=4) (2=3) (3=2) (4=1).
+Bu kodla “1”leri “4”, “4”leri “1” yaparak yönü düzeltiriz.
+```
+
+## Adım B: Güvenilirlik Analizi (Cronbach’s Alpha)
+Soruların yönünü düzelttik, peki bu sorular gerçekten aynı şeyi (Ruh Sağlığını) mi ölçüyor? Belki araya karışan alakasız bir soru var? Bunu anlamak için Reliability Analysis yaparız. Çıkan sonuca (Cronbach’s Alpha) bakarız.
+
+* Sonuç 0.70'in üzerindeyse: Harika! Sorular birbiriyle tutarlı, bunları toplayıp tek bir puan yapabilirsin.
+* Sonuç düşükse: Hangi sorunun “oyunbozanlık” yaptığını bulup onu çıkarman gerekir
+## 5. Veri Kaybını Önleyen Sihirli Dokunuş: MEAN.1
+Soruları birleştirip ortalama alırken, bir katılımcı bile bir soruyu boş bıraksa SPSS genelde tüm sonucu iptal eder. Bunu önlemek için harika bir kodumuz var:
+```excel
+COMPUTE RuhSagligiSkoru = MEAN.1(Soru1, Soru2, Soru3).
+```
+Bu kod şu anlama gelir: “Katılımcı sorulardan en az 1 tanesine bile cevap verdiyse, eldeki verilerle ortalamasını al, o kişiyi silme.” Böylece veri kaybını minimuma indiririz.
+
+## Sonuç: Analize Hazırız!
+Bugün veriye balıklama dalmak yerine;
+
+* Kodlamayı (Syntax) kullanarak veriyi yönetmeyi,
+* Mantıksal operatörlerle (IF/ELSE) yeni gruplar oluşturmayı,
+* Ters kodlama ve Güvenilirlik Analizi ile sağlıklı ölçekler kurmayı öğrendik.

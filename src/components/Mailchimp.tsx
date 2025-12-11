@@ -1,9 +1,11 @@
 "use client";
 
 import { mailchimp, newsletter } from "@/resources";
-import { Button, Heading, Input, Text, Background, Column, Row } from "@once-ui-system/core";
+import { Button, Heading, Input, Text, Background, Column, Row, Textarea } from "@once-ui-system/core";
+// DİKKAT: Textarea yukarıdaki importlarda yoksa, hata verirse import kısmından silip 
+// aşağıda standart <textarea ... /> kullanabiliriz.
 import { opacity, SpacingToken } from "@once-ui-system/core";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 function debounce<T extends (...args: any[]) => void>(func: T, delay: number): T {
   let timeout: ReturnType<typeof setTimeout>;
@@ -15,14 +17,13 @@ function debounce<T extends (...args: any[]) => void>(func: T, delay: number): T
 
 export const Mailchimp: React.FC<React.ComponentProps<typeof Column>> = ({ ...flex }) => {
   const [email, setEmail] = useState<string>("");
+  // Mesaj için yeni state
+  const [message, setMessage] = useState<string>(""); 
   const [error, setError] = useState<string>("");
   const [touched, setTouched] = useState<boolean>(false);
 
   const validateEmail = (email: string): boolean => {
-    if (email === "") {
-      return true;
-    }
-
+    if (email === "") return true;
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
   };
@@ -30,21 +31,30 @@ export const Mailchimp: React.FC<React.ComponentProps<typeof Column>> = ({ ...fl
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setEmail(value);
-
-    if (!validateEmail(value)) {
-      setError("Please enter a valid email address.");
-    } else {
-      setError("");
+    if (error) {
+        if (!validateEmail(value)) setError("Please enter a valid email address.");
+        else setError("");
     }
   };
 
-  const debouncedHandleChange = debounce(handleChange, 2000);
+  const debouncedValidation = useCallback(
+    debounce((value: string) => {
+      if (!validateEmail(value)) setError("Please enter a valid email address.");
+      else setError("");
+    }, 1000),
+    []
+  );
+
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setEmail(value);
+      if (!error) debouncedValidation(value);
+      else if(validateEmail(value)) setError("");
+  }
 
   const handleBlur = () => {
     setTouched(true);
-    if (!validateEmail(email)) {
-      setError("Please enter a valid email address.");
-    }
+    if (!validateEmail(email)) setError("Please enter a valid email address.");
   };
 
   if (newsletter.display === false) return null;
@@ -65,119 +75,73 @@ export const Mailchimp: React.FC<React.ComponentProps<typeof Column>> = ({ ...fl
       <Background
         top="0"
         position="absolute"
-        mask={{
-          x: mailchimp.effects.mask.x,
-          y: mailchimp.effects.mask.y,
-          radius: mailchimp.effects.mask.radius,
-          cursor: mailchimp.effects.mask.cursor,
-        }}
+        mask={{ x: 0, y: 0, radius: 100, cursor: false }}
         gradient={{
-          display: mailchimp.effects.gradient.display,
-          opacity: mailchimp.effects.gradient.opacity as opacity,
-          x: mailchimp.effects.gradient.x,
-          y: mailchimp.effects.gradient.y,
-          width: mailchimp.effects.gradient.width,
-          height: mailchimp.effects.gradient.height,
-          tilt: mailchimp.effects.gradient.tilt,
-          colorStart: mailchimp.effects.gradient.colorStart,
-          colorEnd: mailchimp.effects.gradient.colorEnd,
+             display: true, opacity: 60, x: 0, y: 0, width: 100, height: 100, tilt: 0, 
+             colorStart: "accent-solid-medium", colorEnd: "static-transparent" 
         }}
-        dots={{
-          display: mailchimp.effects.dots.display,
-          opacity: mailchimp.effects.dots.opacity as opacity,
-          size: mailchimp.effects.dots.size as SpacingToken,
-          color: mailchimp.effects.dots.color,
-        }}
-        grid={{
-          display: mailchimp.effects.grid.display,
-          opacity: mailchimp.effects.grid.opacity as opacity,
-          color: mailchimp.effects.grid.color,
-          width: mailchimp.effects.grid.width,
-          height: mailchimp.effects.grid.height,
-        }}
-        lines={{
-          display: mailchimp.effects.lines.display,
-          opacity: mailchimp.effects.lines.opacity as opacity,
-          size: mailchimp.effects.lines.size as SpacingToken,
-          thickness: mailchimp.effects.lines.thickness,
-          angle: mailchimp.effects.lines.angle,
-          color: mailchimp.effects.lines.color,
-        }}
+        dots={{ display: true, opacity: 30, size: "2", color: "brand-on-background-weak" }}
       />
-      <Column maxWidth="xs" horizontal="center">
-        <Heading marginBottom="s" variant="display-strong-xs">
+      
+      <Column maxWidth="s" horizontal="center" marginBottom="l">
+        <Heading marginBottom="s" variant="display-strong-xs" align="center">
           {newsletter.title}
         </Heading>
-        <Text wrap="balance" marginBottom="l" variant="body-default-l" onBackground="neutral-weak">
+        <Text wrap="balance" align="center" variant="body-default-l" onBackground="neutral-weak">
           {newsletter.description}
         </Text>
       </Column>
+      
       <form
         style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
         }}
-        action={mailchimp.action}
-        method="post"
-        id="mc-embedded-subscribe-form"
-        name="mc-embedded-subscribe-form"
+        // BURAYA KENDİ FORMSPREE LINKINI KOYMAYI UNUTMA
+        action="https://formspree.io/f/mpwvyebg" 
+        method="POST"
       >
-        <Row
-          id="mc_embed_signup_scroll"
+        <Column
           fillWidth
-          maxWidth={24}
-          s={{ direction: "column" }}
-          gap="8"
+          maxWidth="s" // Formu biraz daha genişlettik (s beden)
+          gap="16"     // Elemanlar arası boşluk
         >
+          {/* Email Alanı */}
           <Input
-            formNoValidate
-            id="mce-EMAIL"
-            name="EMAIL"
+            id="email"
+            name="email"
+            label="Email" // Varsa label özelliği, yoksa silebilirsin
             type="email"
-            placeholder="Email"
+            placeholder="Your email address"
             required
-            onChange={(e) => {
-              if (error) {
-                handleChange(e);
-              } else {
-                debouncedHandleChange(e);
-              }
-            }}
+            value={email} 
+            onChange={onInputChange}
             onBlur={handleBlur}
             errorMessage={error}
           />
-          <div style={{ display: "none" }}>
-            <input
-              type="checkbox"
-              readOnly
-              name="group[3492][1]"
-              id="mce-group[3492]-3492-0"
-              value=""
-              checked
-            />
-          </div>
-          <div id="mce-responses" className="clearfalse">
-            <div className="response" id="mce-error-response" style={{ display: "none" }}></div>
-            <div className="response" id="mce-success-response" style={{ display: "none" }}></div>
-          </div>
-          <div aria-hidden="true" style={{ position: "absolute", left: "-5000px" }}>
-            <input
-              type="text"
-              readOnly
-              name="b_c1a5a210340eb6c7bff33b2ba_0462d244aa"
-              tabIndex={-1}
-              value=""
-            />
-          </div>
-          <div className="clear">
-            <Row height="48" vertical="center">
-              <Button id="mc-embedded-subscribe" value="Subscribe" size="m" fillWidth>
-                Subscribe
-              </Button>
-            </Row>
-          </div>
-        </Row>
+
+          {/* Mesaj Alanı */}
+          {/* Eğer Textarea bileşeni yoksa aşağıya standart HTML alternatifi ekledim */}
+          <Textarea
+            id="message"
+            name="message"
+            label="Message"
+            placeholder="Write your message here..."
+            required
+            rows={4} // Satır sayısı
+            value={message}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)}
+          />
+
+          {/* Konu Başlığı (Gizli) */}
+          <input type="hidden" name="_subject" value="Portfolyo İletişim Formu Mesajı" />
+
+          {/* Buton */}
+          <Button type="submit" size="m" fillWidth>
+            Send Message
+          </Button>
+        </Column>
       </form>
     </Column>
   );

@@ -1,0 +1,132 @@
+---
+title: "MailMerge: Attribute-Driven Automation"
+summary: "A production-grade email automation system built with .NET Core Reflection and React. Features auto-discovery of data models via attributes, dynamic chart rendering, and PDF generation."
+publishedAt: "2025-12-9"
+images:
+  - "/images/projects/projects-02/template-processor.png"
+  - "/images/projects/projects-02/ayarlar.png"
+  - "/images/projects/projects-02/template.png"
+  - "/images/projects/projects-02/example.png"
+team:
+  - name: "Zeynep Basoglu"
+    role: "Full-Stack Developer"
+    avatar: "/images/vize.jpg"
+    linkedIn: "https://www.linkedin.com/in/zeynep-ba%C5%9Fo%C4%9Flu-181872229/"
+link: "https://github.com/zeynepbsgl" 
+---
+
+## Project Overview
+
+**MailMerge** is a "Production-Grade" Email Automation System designed to streamline repetitive email processes, generate dynamic content, and deliver personalized experiences.
+
+Unlike standard mailing tools, this project is architected as an **end-to-end framework**. It handles template management, dynamic chart generation, PDF output, and most importantly, **automatic system integration via C# Attributes**.
+
+{/* Ana Ekran Görüntüsü */}
+<img
+  src="/images/projects/mailmerge/template-processor.png"
+  alt="MailMerge Template Processor UI"
+  width="100%"
+  style={{ borderRadius: '8px', margin: '20px 0', border: '1px solid #333' }}
+/>
+
+---
+
+### 1. Attribute-Driven Architecture (The Core)
+
+The most distinctive feature of MailMerge is its **Self-Discovering Architecture**. I designed the system to automatically integrate new data models without requiring manual configuration or frontend code changes.
+
+By utilizing **.NET Core Reflection**, the system scans for specific attributes (`[TemplatableContext]`, `[TemplatableField]`) at runtime and automatically makes them available in the UI.
+
+#### How It Works:
+* **Plug & Play:** To add a new data module (e.g., Order, Invoice), you simply decorate the class with an attribute.
+* **Auto-Discovery:** The backend parses these attributes and dynamically generates the available placeholders for the frontend editor.
+
+Here is the core logic that enables this automation:
+
+<CodeBlock
+  codes={[
+    {
+      code: `
+// 1. Defining Custom Attributes for Auto-Discovery
+public class TemplatableContextAttribute : Attribute
+{
+    public string Id { get; set; }
+    public string FriendlyName { get; set; }
+
+    public TemplatableContextAttribute(string id, string name)
+    {
+        this.Id = id;
+        this.FriendlyName = name;
+    }
+}
+
+// 2. Applying Attributes to a DTO
+// The system automatically finds this class and adds "Sipariş" to the UI
+[TemplatableContext("CTX001", "Sipariş")]
+public class OrderDto
+{
+    [TemplatableField("Sipariş No", Constants.String)]
+    public string OrderNumber { get; set; }
+
+    [TemplatableField("Toplam Tutar", Constants.Decimal)]
+    public decimal TotalPrice { get; set; }
+
+    [TemplatableField("Sipariş Tarihi", Constants.DateTime, "dd.MM.yyyy")]
+    public DateTime OrderDate { get; set; }
+
+    // Nested properties are also supported
+    [TemplatableField("Adı", Constants.String)]
+    public string FirstName => User?.FirstName;
+
+    [TemplatableField("Ürünler", Constants.List)]
+    public List<ProductDto> Products { get; set; }
+}
+      `,
+      language: "csharp",
+      label: "AttributeArchitecture.cs"
+    }
+  ]}
+/>
+
+---
+
+### 2. Modern UI & Template Engine (React)
+
+The frontend is built with **React** to provide a seamless, real-time editing experience.
+
+* **Real-Time Preview:** As users type Markdown or HTML, the preview updates instantly.
+* **Dynamic Placeholders:** Thanks to the attribute architecture, users can select fields (like `{{Order.OrderNumber}}`) from a dropdown that is populated dynamically by the backend API.
+* **Smart Error Handling:** The editor validates JSON inputs and placeholder syntax in real-time.
+
+<img
+  src="/images/projects/mailmerge/template-add.png"
+  alt="Template Creation Screen"
+  width="100%"
+  style={{ borderRadius: '8px', margin: '20px 0', border: '1px solid #333' }}
+/>
+
+---
+
+### 3. Advanced Chart Rendering Pipeline
+
+The system supports embedding dynamic charts directly into emails. A custom **Template Parser** interprets specific tags and renders them into images or HTML Canvas.
+
+* **Syntax:** `{{Products:PieChart}}`
+* **Process:** The parser identifies the tag -> Fetches the data -> Renders the chart server-side -> Embeds it as a Base64 image.
+
+---
+
+### 4. PDF Generation & Delivery
+
+Users can convert any created template into a professional PDF document with a single click.
+
+* **Engine:** Utilizes **jsPDF** and **html2canvas** to capture the exact look of the template, including dynamic charts and tables.
+* **MailKit Integration:** The system creates the final HTML, attaches the generated PDF (optional), and sends it securely via SMTP using **MailKit**.
+
+---
+
+### 5. Conclusion
+
+MailMerge is more than just a tool; it is a **framework**. It demonstrates how **Reflection** and **Attributes** can be used to create highly scalable software where adding new features is as simple as adding a line of code to a class.
+
+This "Code-First" approach significantly reduces development time for future integrations and ensures type safety across the application.
