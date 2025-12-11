@@ -120,8 +120,8 @@ export default function Home() {
                     Download Resume
                   </Row>
                   <IconButton
-                    href={about.calendar.link}
-                    download
+                   href="/zeynepcv.pdf"  
+                  download="Zeynep_Basoglu_CV.pdf" 
                     target="_blank"
                     data-border="rounded"
                     variant="secondary"
